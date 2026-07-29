@@ -37,6 +37,8 @@ class FakedditDataset(Dataset):
         
         return image, text, label
     
-def get_dataloader(tsv_path, image_dir, preprocess, batch_size=32, shuffle=True):
+def get_dataloader(tsv_path, image_dir, preprocess, batch_size=32, shuffle=True,
+                    num_workers=4, pin_memory=True):
     dataset = FakedditDataset(tsv_path, image_dir, preprocess)
-    return DataLoader(dataset, batch_size=batch_size, shuffle=shuffle)
+    return DataLoader(dataset, batch_size=batch_size, shuffle=shuffle,
+                       num_workers=num_workers, pin_memory=pin_memory)
